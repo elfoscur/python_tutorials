@@ -26,3 +26,8 @@ email='test@email.com is my email'
 atpos=email.find('@')
 domain=email[atpos+1:email.find(' ',atpos)]
 print(domain)
+
+
+print('   this trim your string on both sides'.strip()) #whitespace is the default
+
+print('www.example.com'.lstrip('w.')) #removes 'w' and '.' starting from the left
