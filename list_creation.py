@@ -11,5 +11,5 @@ fhand=open(filename)
 o_fhand=open(o_filename,'w')
 
 for line in fhand:
-    line=line.strip()
+    line=line.strip() #removes the linefeed
     o_fhand.write(apostrophe+line+apostrophe+comma+'\n')
