@@ -23,8 +23,20 @@ for name in name_list:
 print name_dict
 
 #in a more elegant manner, we can use the method get of dictionaries that return
-#a default value if the key is not present
+#the value for the key or a default value if the key is not present
 name_dict=dict()
 for name in name_list:
         name_dict[name] = name_dict.get(name,0)+1
 print name_dict
+
+jjj=list(name_dict) #converts the dictionary in a list
+print(jjj)          #it lost the values
+
+#keys and values are methods of dictionaries
+#items return the key pair values
+print (name_dict.keys())
+print (name_dict.values())
+print(name_dict.items())
+
+for k,v in name_dict.items():
+    print (k,v)
