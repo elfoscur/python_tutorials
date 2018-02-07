@@ -1,30 +1,30 @@
 
-l = list() #list declaration
+l = list()  # list declaration
 l.append(1)
 l.append(2)
 l.append(3)
 
-print l
+print (l)
 
-t = (3,2,1) #tuple declaration, a tuple is immutable
-print sorted(t) #function that sort a tuple
+t = (3, 2, 1)  # tuple declaration, a tuple is immutable
+print (sorted(t)) # unction that sort a tuple
 (x,y)=(10,20)
-print x,y
+print (x,y)
 
-d = {'c':20,'d':30,'a':5} #dictionary constructor
+d = {'c':20,'d':30,'a':5} # dictionary constructor
 print(d)
 
 l = list()
 for k,v in d.items():
-    l.append((v,k)) #put the tuple into the list, a list of tuples, in this case
-                    #the value is put in the first position and the key in the second
+    l.append((v,k)) # put the tuple into the list, a list of tuples, in this case
+                    # the value is put in the first position and the key in the second
 print(sorted(l))
 
 l.append((1,2,3)) #tuple of 3 values
-print sorted(l,reverse=True) #Reverse = descending order
+print (sorted(l,reverse=True)) #Reverse = descending order
 
 #list slicer
-print l[:2]  #print two elements of the list
+print ( l[:2] )  #print two elements of the list
 
 
 #LIST COMPREHENSION: http://www.pythonforbeginners.com/basics/list-comprehensions-in-python

@@ -1,5 +1,5 @@
 
-import Tkinter as tkinter
+# import Tkinter as tkinter
 from tkinter import Tk, Label, Button
 
 class MyFirstGUI:
