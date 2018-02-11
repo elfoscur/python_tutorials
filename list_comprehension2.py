@@ -10,7 +10,7 @@ l1 = [[x, y] for x in a for y in b]
 
 c = [[1, 2], [3, 4], [5, 6]]
 
-l2 = [ e for e in c]  # [[1, 2], [3, 4], [5, 6]]
-l2 = [ elem for l in c for elem in l]  # [1, 2, 3, 4, 5, 6]
-l2 = [c[i] for i in range(2,-1,-1)]  #[[5, 6], [3, 4], [1, 2]]
+l2 = [e for e in c]  # [[1, 2], [3, 4], [5, 6]]
+l2 = [elem for l in c for elem in l]  # [1, 2, 3, 4, 5, 6]
+l2 = [c[i] for i in range(2, -1, -1)]  # [[5, 6], [3, 4], [1, 2]]
 print(l2)
