@@ -10,6 +10,7 @@ Graph1: http://storage.googleapis.com/codeskulptor-alg/alg_example_graph1.jpg
 Graph2: http://storage.googleapis.com/codeskulptor-alg/alg_example_graph2.jpg
 """
 
+
 EX_GRAPH0 = {0: {1, 2}, 1: {}, 2: {}}
 
 print(EX_GRAPH0)
@@ -52,19 +53,40 @@ print(make_complete_graph(5))
 
 
 def compute_in_degrees(digraph):
-    """.
-    Takes a directed graph  (represented as a dictionary) and computes the
-    in-degrees for the nodes in the graph. The function should return a dictionary
-    with the same set of keys (nodes) as  whose corresponding values are the number
-    of edges whose head matches a particular node.
-    """
+  """.
+  Takes a directed graph  (represented as a dictionary) and computes the
+  in-degrees for the nodes in the graph. The function should return a dictionary
+  with the same set of keys (nodes) as  whose corresponding values are the number
+  of edges whose head matches a particular node.
+  """
 
-    d = {}
-    keys = digraph.keys()
-    d = ({i:k for k in keys for i in digraph[k]})
-    return d
+  d = {}
+  keys = digraph.keys()
 
+  d = {key: 0 for key in keys}
 
-print(compute_in_degrees(EX_GRAPH1))
+  for key in keys:
+	for el in digraph[key]:
+		d[el] += 1
 
-d = {}
+  return d
+
+def in_degree_distribution(digraph):
+	""".
+	Takes a directed graph  (represented as a dictionary) and computes the unnormalized
+	distribution of the in-degrees of the graph.
+	The function should return a dictionary whose keys correspond to in-degrees of nodes in
+	the graph. The value associated with each particular in-degree is the number of nodes
+	with that in-degree. In-degrees with no corresponding nodes in the graph are not
+	included in the dictionary.
+	"""
+	d_distr = {}
+	d = compute_in_degrees(digraph)
+
+	for (key,value) in d.items():
+			d_distr[value] = d_distr.get(value,0) + 1
+
+	return d_distr
+
+print(compute_in_degrees(EX_GRAPH2))  # {0: 1, 1: 3, 2: 3, 3: 3, 4: 2, 5: 2, 6: 2, 7: 3, 8: 0, 9: 0}
+print(in_degree_distribution(EX_GRAPH2))  # {1: 1, 2: 3, 3: 4}
