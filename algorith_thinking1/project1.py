@@ -70,7 +70,7 @@ def compute_in_degrees(digraph):
           d[el] += 1
 
   return d
-  
+
 
 def in_degree_distribution(digraph):
 	""".
