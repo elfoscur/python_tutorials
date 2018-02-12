@@ -66,8 +66,8 @@ def compute_in_degrees(digraph):
   d = {key: 0 for key in keys}
 
   for key in keys:
-	for el in digraph[key]:
-		d[el] += 1
+      for el in digraph[key]:
+          d[el] += 1
 
   return d
 
