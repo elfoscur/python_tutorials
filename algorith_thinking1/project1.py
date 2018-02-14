@@ -1,5 +1,7 @@
 """.
 
+Project1
+
 https://www.coursera.org/learn/algorithmic-thinking-1/supplement/hw1o3/project-1-description
 
 Graphs knoledge: https://storage.googleapis.com/codeskulptor-alg/pdf/GraphBasics.pdf
@@ -8,8 +10,14 @@ Project description: https://www.coursera.org/learn/algorithmic-thinking-1/suppl
 Graph0: http://storage.googleapis.com/codeskulptor-alg/alg_example_graph0.jpg
 Graph1: http://storage.googleapis.com/codeskulptor-alg/alg_example_graph1.jpg
 Graph2: http://storage.googleapis.com/codeskulptor-alg/alg_example_graph2.jpg
-"""
 
+Application 1
+https://www.coursera.org/learn/algorithmic-thinking-1/supplement/i4zaL/application-1-description
+
+
+
+"""
+import matplotlib.pyplot as plt
 
 EX_GRAPH0 = {0: {1, 2}, 1: {}, 2: {}}
 
@@ -53,24 +61,24 @@ print(make_complete_graph(5))
 
 
 def compute_in_degrees(digraph):
-  """.
-  Takes a directed graph  (represented as a dictionary) and computes the
-  in-degrees for the nodes in the graph. The function should return a dictionary
-  with the same set of keys (nodes) as  whose corresponding values are the number
-  of edges whose head matches a particular node.
-  """
+    """.
+    Takes a directed graph  (represented as a dictionary) and computes the
+    in-degrees for the nodes in the graph. The function should return a dictionary
+    with the same set of keys (nodes) as  whose corresponding values are the number
+    of edges whose head matches a particular node.
+    """
 
-  d = {}
-  keys = digraph.keys()
+    d = {}
+    keys = digraph.keys()
 
-  d = {key: 0 for key in keys}
+    d = digraph.fromkeys(keys, 0)
 
-  for key in keys:
-      for el in digraph[key]:
-          d[el] += 1
+    for key in keys:
 
-  return d
+        for el in digraph[key]:
+            d[el] += 1
 
+    return d
 
 def in_degree_distribution(digraph):
 	""".
@@ -85,9 +93,77 @@ def in_degree_distribution(digraph):
 	d = compute_in_degrees(digraph)
 
 	for (key,value) in d.items():
-			d_distr[value] = d_distr.get(value,0) + 1
+		if value != 0:
+			d_distr[value] = d_distr.get(value, 0) + 1
 
 	return d_distr
 
 print(compute_in_degrees(EX_GRAPH2))  # {0: 1, 1: 3, 2: 3, 3: 3, 4: 2, 5: 2, 6: 2, 7: 3, 8: 0, 9: 0}
 print(in_degree_distribution(EX_GRAPH2))  # {1: 1, 2: 3, 3: 4}
+
+# Application 1
+
+graph_file = 'alg_phys-cite.txt'
+
+
+def load_graph(graph_file, delimiter):
+    """.
+
+    Load the graph provided in an input file.
+
+    """
+
+    f_handler = open(graph_file, 'r')
+    graph_text = f_handler.read()
+    graph_text = graph_text.strip()
+    graph_lines = graph_text.split('\n')
+
+	# print "Loaded graph with", len(graph_lines), "nodes"
+
+    answer_graph = {}
+    for line in graph_lines:
+
+    	line = line.strip()
+    	neighbors = line.split(delimiter)
+    	node = int(neighbors[0])
+    	s = set()
+
+    	for neighbor in neighbors[1: ]:
+    		s.add(int(neighbor) if neighbor != '' else neighbor)
+    	answer_graph[node] = s
+
+    return answer_graph
+
+def normalize_distribution(d_distribution):
+	""".
+
+	Normalize the dictionary that contains the distribution.
+	Input d_distribution :dictionary with the distribution
+	Output dictionary with the normalized distribution
+	"""
+
+	n_tot_nodes = len(d_distribution)
+	d_norm_distribution = { k: d_distribution[k] / float(n_tot_nodes) for k in d_distribution.keys()}
+
+	return d_norm_distribution
+
+def plot_normalized(g_norm_distr):
+	x_vals = []
+	y_vals = []
+
+	for (k,v) in g_norm_distr.items():
+		x_vals.append(k)
+		y_vals.append(v)
+
+	plt.loglog(x_vals, y_vals, color='black', linestyle='None', marker='.', markersize=6)
+	plt.xlabel('log of number of degrees')
+	plt.ylabel('log of distribution')
+	plt.title('log/log normalized distribution of high energy phisics theory papers')
+	plt.show()
+
+
+g = load_graph(graph_file, ' ')
+g_distr = in_degree_distribution(g)
+print(type(g_distr))
+g_norm_distr = normalize_distribution(g_distr)
+plot_normalized(g_norm_distr)
