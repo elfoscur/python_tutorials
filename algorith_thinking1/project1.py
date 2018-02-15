@@ -135,17 +135,19 @@ def load_graph(graph_file, delimiter):
     return answer_graph
 
 def normalize_distribution(d_distribution):
-	""".
+    """.
 
-	Normalize the dictionary that contains the distribution.
-	Input d_distribution :dictionary with the distribution
-	Output dictionary with the normalized distribution
-	"""
+    Normalize the dictionary that contains the distribution.
+    Input d_distribution :dictionary with the distribution
+    Output dictionary with the normalized distribution
+    """
 
-	n_tot_nodes = len(d_distribution)
-	d_norm_distribution = { k: d_distribution[k] / float(n_tot_nodes) for k in d_distribution.keys()}
+    sum_distr = sum(d_distribution.values())
+    print('sum_distr',sum_distr)
+    print('d_distribution.keys()',d_distribution.keys())
+    d_norm_distribution = { k: d_distribution[k] / float(sum_distr) for k in d_distribution.keys()}
 
-	return d_norm_distribution
+    return d_norm_distribution
 
 def plot_normalized(g_norm_distr):
 	x_vals = []
@@ -163,7 +165,11 @@ def plot_normalized(g_norm_distr):
 
 
 g = load_graph(graph_file, ' ')
+
+g={1: {2, 3}, 2: {3, 4}, 3: {4}, 4: {}}
 g_distr = in_degree_distribution(g)
+print('in_degree',g_distr)
 print(type(g_distr))
 g_norm_distr = normalize_distribution(g_distr)
+print('distr',g_norm_distr)
 plot_normalized(g_norm_distr)
