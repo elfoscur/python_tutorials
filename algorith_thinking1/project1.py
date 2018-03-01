@@ -18,6 +18,7 @@ https://www.coursera.org/learn/algorithmic-thinking-1/supplement/i4zaL/applicati
 
 """
 import matplotlib.pyplot as plt
+import random
 
 EX_GRAPH0 = {0: {1, 2}, 1: {}, 2: {}}
 
@@ -164,12 +165,40 @@ def plot_normalized(g_norm_distr):
 	plt.show()
 
 
+def random_directed_graph(num_nodes,probability):
+    """.
+
+    Generate a ramndom directed graph, given the number of num_nodes
+    it create an edge from i to j and from j to p with the given probability
+    """
+
+    random.seed()
+
+    d = {k: set() for k in range(num_nodes)}
+    for i in range(num_nodes):
+        for j in range(num_nodes):
+            if i == j:
+                continue
+            p = random.random()
+            if p <= probability:
+                d[i].add(j)
+            p = random.random()
+            if p <= probability:
+                d[j].add(i)
+
+    return d
 g = load_graph(graph_file, ' ')
 
 #g={1: {2, 3}, 2: {3, 4}, 3: {4}, 4: {}}
 g_distr = in_degree_distribution(g)
-print('in_degree',g_distr)
-print(type(g_distr))
+#print('in_degree',g_distr)
+#print(type(g_distr))
 g_norm_distr = normalize_distribution(g_distr)
-print('distr',g_norm_distr)
+#print('distr',g_norm_distr)
+#plot_normalized(g_norm_distr)
+
+g_distr = in_degree_distribution(random_directed_graph(27770,0.0005))
+#print('in_degree',g_distr)
+#print(type(g_distr))
+g_norm_distr = normalize_distribution(g_distr)
 plot_normalized(g_norm_distr)
