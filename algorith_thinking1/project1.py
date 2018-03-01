@@ -166,7 +166,7 @@ def plot_normalized(g_norm_distr):
 
 g = load_graph(graph_file, ' ')
 
-g={1: {2, 3}, 2: {3, 4}, 3: {4}, 4: {}}
+#g={1: {2, 3}, 2: {3, 4}, 3: {4}, 4: {}}
 g_distr = in_degree_distribution(g)
 print('in_degree',g_distr)
 print(type(g_distr))
